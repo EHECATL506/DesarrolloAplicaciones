@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Django default">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.2">
+    <root id="1"/>
+    <database id="2" parent="1" name="tiendavideojuegos">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="information_schema"/>
+    <schema id="4" parent="2" name="pg_catalog"/>
+    <schema id="5" parent="2" name="public">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <sequence id="6" parent="5" name="auth_group_id_seq"/>
+    <sequence id="7" parent="5" name="auth_group_permissions_id_seq"/>
+    <sequence id="8" parent="5" name="auth_permission_id_seq"/>
+    <sequence id="9" parent="5" name="auth_user_groups_id_seq"/>
+    <sequence id="10" parent="5" name="auth_user_id_seq"/>
+    <sequence id="11" parent="5" name="auth_user_user_permissions_id_seq"/>
+    <sequence id="12" parent="5" name="compra_idCompra_seq"/>
+    <sequence id="13" parent="5" name="django_admin_log_id_seq"/>
+    <sequence id="14" parent="5" name="django_content_type_id_seq"/>
+    <sequence id="15" parent="5" name="django_migrations_id_seq"/>
+    <sequence id="16" parent="5" name="reserva_idReservacion_seq"/>
+    <sequence id="17" parent="5" name="usuarios_idCliente_seq"/>
+    <sequence id="18" parent="5" name="venta_idVenta_seq"/>
+    <sequence id="19" parent="5" name="videojuego_idVideojuego_seq"/>
+    <table id="20" parent="5" name="auth_group"/>
+    <table id="21" parent="5" name="auth_group_permissions"/>
+    <table id="22" parent="5" name="auth_permission"/>
+    <table id="23" parent="5" name="auth_user"/>
+    <table id="24" parent="5" name="auth_user_groups"/>
+    <table id="25" parent="5" name="auth_user_user_permissions"/>
+    <table id="26" parent="5" name="compra"/>
+    <table id="27" parent="5" name="django_admin_log"/>
+    <table id="28" parent="5" name="django_content_type"/>
+    <table id="29" parent="5" name="django_migrations"/>
+    <table id="30" parent="5" name="django_session"/>
+    <table id="31" parent="5" name="reserva"/>
+    <table id="32" parent="5" name="tienda"/>
+    <table id="33" parent="5" name="usuarios"/>
+    <table id="34" parent="5" name="venta"/>
+    <table id="35" parent="5" name="videojuego"/>
+    <column id="36" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_group_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="37" parent="20" name="name">
+      <Position>2</Position>
+      <DataType>varchar(80)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="38" parent="20" name="auth_group_name_key">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="39" parent="20" name="auth_group_name_253ae2a6331666e8_like">
+      <ColNames>name</ColNames>
+    </index>
+    <key id="40" parent="20" name="auth_group_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="41" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_group_permissions_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="42" parent="21" name="group_id">
+      <Position>2</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="21" name="permission_id">
+      <Position>3</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="44" parent="21" name="auth_group_permissions_group_id_key">
+      <ColNames>group_id
+permission_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="45" parent="21" name="auth_group_permissions_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="46" parent="21" name="auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id">
+      <ColNames>group_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_group</RefTableName>
+      <RefKeyName>auth_group_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="47" parent="21" name="auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id">
+      <ColNames>permission_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_permission</RefTableName>
+      <RefKeyName>auth_permission_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="48" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_permission_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="49" parent="22" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="22" name="content_type_id">
+      <Position>3</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="22" name="codename">
+      <Position>4</Position>
+      <DataType>varchar(100)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="52" parent="22" name="auth_permission_content_type_id_key">
+      <ColNames>content_type_id
+codename</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="53" parent="22" name="auth_permission_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="54" parent="22" name="auth_content_type_id_508cf46651277a81_fk_django_content_type_id">
+      <ColNames>content_type_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>django_content_type</RefTableName>
+      <RefKeyName>django_content_type_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="55" parent="23" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_user_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="56" parent="23" name="password">
+      <Position>2</Position>
+      <DataType>varchar(128)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="23" name="last_login">
+      <Position>3</Position>
+      <DataType>timestamptz(35,6)|93</DataType>
+    </column>
+    <column id="58" parent="23" name="is_superuser">
+      <Position>4</Position>
+      <DataType>bool(1)|-7</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="23" name="username">
+      <Position>5</Position>
+      <DataType>varchar(30)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="23" name="first_name">
+      <Position>6</Position>
+      <DataType>varchar(30)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="23" name="last_name">
+      <Position>7</Position>
+      <DataType>varchar(30)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="23" name="email">
+      <Position>8</Position>
+      <DataType>varchar(254)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="23" name="is_staff">
+      <Position>9</Position>
+      <DataType>bool(1)|-7</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="23" name="is_active">
+      <Position>10</Position>
+      <DataType>bool(1)|-7</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="23" name="date_joined">
+      <Position>11</Position>
+      <DataType>timestamptz(35,6)|93</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="66" parent="23" name="auth_user_username_key">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="67" parent="23" name="auth_user_username_51b3b110094b8aae_like">
+      <ColNames>username</ColNames>
+    </index>
+    <key id="68" parent="23" name="auth_user_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="69" parent="24" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_user_groups_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="70" parent="24" name="user_id">
+      <Position>2</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="24" name="group_id">
+      <Position>3</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="72" parent="24" name="auth_user_groups_user_id_key">
+      <ColNames>user_id
+group_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="73" parent="24" name="auth_user_groups_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="74" parent="24" name="auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id">
+      <ColNames>user_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="75" parent="24" name="auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id">
+      <ColNames>group_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_group</RefTableName>
+      <RefKeyName>auth_group_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="76" parent="25" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;auth_user_user_permissions_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="77" parent="25" name="user_id">
+      <Position>2</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="25" name="permission_id">
+      <Position>3</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="79" parent="25" name="auth_user_user_permissions_user_id_key">
+      <ColNames>user_id
+permission_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="80" parent="25" name="auth_user_user_permissions_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="81" parent="25" name="auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id">
+      <ColNames>user_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="82" parent="25" name="auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id">
+      <ColNames>permission_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_permission</RefTableName>
+      <RefKeyName>auth_permission_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="83" parent="26" name="idCompra">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;&quot;compra_idCompra_seq&quot;&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="84" parent="26" name="Fecha">
+      <Position>2</Position>
+      <DataType>date(13)|91</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="26" name="Monto">
+      <Position>3</Position>
+      <DataType>numeric(131089)|2</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="26" name="idVideojuego">
+      <Position>4</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="87" parent="26" name="cantidad">
+      <Position>5</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="88" parent="26" name="compra_pkey">
+      <ColNames>idCompra</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="89" parent="27" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;django_admin_log_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="90" parent="27" name="action_time">
+      <Position>2</Position>
+      <DataType>timestamptz(35,6)|93</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="91" parent="27" name="object_id">
+      <Position>3</Position>
+      <DataType>text(max)|12</DataType>
+    </column>
+    <column id="92" parent="27" name="object_repr">
+      <Position>4</Position>
+      <DataType>varchar(200)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="93" parent="27" name="action_flag">
+      <Position>5</Position>
+      <DataType>int2(5)|5</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="94" parent="27" name="change_message">
+      <Position>6</Position>
+      <DataType>text(max)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="95" parent="27" name="content_type_id">
+      <Position>7</Position>
+      <DataType>int4(10)|4</DataType>
+    </column>
+    <column id="96" parent="27" name="user_id">
+      <Position>8</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="97" parent="27" name="django_admin_log_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="98" parent="27" name="djan_content_type_id_697914295151027a_fk_django_content_type_id">
+      <ColNames>content_type_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>django_content_type</RefTableName>
+      <RefKeyName>django_content_type_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="99" parent="27" name="django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id">
+      <ColNames>user_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_user</RefTableName>
+      <RefKeyName>auth_user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="100" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;django_content_type_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="101" parent="28" name="app_label">
+      <Position>2</Position>
+      <DataType>varchar(100)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="102" parent="28" name="model">
+      <Position>3</Position>
+      <DataType>varchar(100)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="103" parent="28" name="django_content_type_app_label_45f3b1d93ec8c61c_uniq">
+      <ColNames>app_label
+model</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="104" parent="28" name="django_content_type_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="105" parent="29" name="id">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;django_migrations_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="106" parent="29" name="app">
+      <Position>2</Position>
+      <DataType>varchar(255)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="29" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="108" parent="29" name="applied">
+      <Position>4</Position>
+      <DataType>timestamptz(35,6)|93</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="109" parent="29" name="django_migrations_pkey">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="110" parent="30" name="session_key">
+      <Position>1</Position>
+      <DataType>varchar(40)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="30" name="session_data">
+      <Position>2</Position>
+      <DataType>text(max)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="112" parent="30" name="expire_date">
+      <Position>3</Position>
+      <DataType>timestamptz(35,6)|93</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="113" parent="30" name="django_session_de54fa62">
+      <ColNames>expire_date</ColNames>
+    </index>
+    <key id="114" parent="30" name="django_session_pkey">
+      <ColNames>session_key</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="115" parent="31" name="idReservacion">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;&quot;reserva_idReservacion_seq&quot;&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="116" parent="31" name="estado">
+      <Position>2</Position>
+      <DataType>varchar(10)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="117" parent="31" name="idCliente">
+      <Position>3</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="118" parent="31" name="fecha">
+      <Position>4</Position>
+      <DataType>date(13)|91</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="119" parent="31" name="idVideojuego">
+      <Position>5</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="120" parent="31" name="reserva_pkey">
+      <ColNames>idReservacion</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="121" parent="32" name="tienda">
+      <Position>1</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="122" parent="32" name="nombre">
+      <Position>2</Position>
+      <DataType>varchar(35)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="123" parent="33" name="idCliente">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;&quot;usuarios_idCliente_seq&quot;&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="124" parent="33" name="nombre">
+      <Position>2</Position>
+      <DataType>varchar(30)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="33" name="apellidos">
+      <Position>3</Position>
+      <DataType>varchar(30)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="126" parent="33" name="telefono">
+      <Position>4</Position>
+      <DataType>int4(10)|4</DataType>
+    </column>
+    <column id="127" parent="33" name="correo">
+      <Position>5</Position>
+      <DataType>varchar(35)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="128" parent="33" name="usuarios_pkey">
+      <ColNames>idCliente</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="129" parent="34" name="idVenta">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;&quot;venta_idVenta_seq&quot;&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="130" parent="34" name="monto">
+      <Position>2</Position>
+      <DataType>numeric(131089)|2</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="131" parent="34" name="fechaventa">
+      <Position>3</Position>
+      <DataType>date(13)|91</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="132" parent="34" name="idvideojuego">
+      <Position>4</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="133" parent="34" name="cantidadVendida">
+      <Position>5</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="134" parent="34" name="reserva">
+      <Position>6</Position>
+      <DataType>bool(1)|-7</DataType>
+    </column>
+    <column id="135" parent="34" name="idCliente">
+      <Position>7</Position>
+      <DataType>int4(10)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="136" parent="34" name="venta_pkey">
+      <ColNames>idVenta</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="137" parent="34" name="venta_idCliente_fkey">
+      <ColNames>idCliente</ColNames>
+      <RefSchemaName>public</RefSchemaName>
+      <RefTableName>auth_group</RefTableName>
+      <RefKeyName>auth_group_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="138" parent="35" name="idVideojuego">
+      <Position>1</Position>
+      <DataType>serial(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>nextval(&apos;&quot;videojuego_idVideojuego_seq&quot;&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="139" parent="35" name="nombre">
+      <Position>2</Position>
+      <DataType>varchar(50)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="140" parent="35" name="genero">
+      <Position>3</Position>
+      <DataType>varchar(20)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="141" parent="35" name="precioVenta">
+      <Position>4</Position>
+      <DataType>numeric(131089)|2</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="142" parent="35" name="clasificacion">
+      <Position>5</Position>
+      <DataType>varchar(1)|12</DataType>
+    </column>
+    <column id="143" parent="35" name="disponibilidad">
+      <Position>6</Position>
+      <DataType>int2(5)|5</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="144" parent="35" name="descripcion">
+      <Position>7</Position>
+      <DataType>varchar(50)|12</DataType>
+    </column>
+    <column id="145" parent="35" name="fechaRegistro">
+      <Position>8</Position>
+      <DataType>date(13)|91</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="146" parent="35" name="videojuego_pkey">
+      <ColNames>idVideojuego</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
