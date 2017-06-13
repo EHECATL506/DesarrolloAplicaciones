@@ -13,6 +13,7 @@ urlpatterns = patterns('tiendavideojuegos.Servicios.seguridad.views',
                        url(r'^ventas/', ventas),
                        url(r'^ingresos/', ingresos),
                        url(r'^egresos/', egresos),
-                       url(r'^catalogo/', catalogo)
+                       url(r'^catalogo/', catalogo),
+                       url(r'^compras/', compras)
 
 )

@@ -56,7 +56,7 @@ ROOT_URLCONF = 'tiendavideojuegos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'plantillas') ],
+        'DIRS': [os.path.join(os.path.dirname(__file__), 'plantillas'), os.path.join(BASE_DIR, 'plantillas')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
