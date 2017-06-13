@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Catalogo</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="fuentes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="fuentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+
+        <!-- propios CSS -->
+        <link rel="stylesheet" href="css/main.css">
+
+    </head>
+    <body>
+        <nav id="mainNav" class="navbar navbar-default navbar-custom" style="padding: 10px;">
+            <div class="container">
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="#page-top">Catalogo</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="compras.html">Compras</a>
+                        </li>
+                        <li class="page-scroll active">
+                            <a href="catalogo.html">Catalogo</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="venta.html">Ventas</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="sucursales.html">Sucursales</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="#">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="container" ng-app="Video_Juegos" ng-controller="videojuegosController">
+
+
+
+            <header>
+                <h1 class="inline padding-sides">Games4U </h1><small> Videojuegos</small>
+            </header>
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Genero</th>
+                    <th>Clasificación</th>
+                    <th>Fecha de Publicación</th>
+                    <th>Precio</th>
+                </tr>
+                <tr ng-repeat="x in videojuegos" ng-click="seleccionar(this.x)" class="{{(indiceSeleccionado == x.idvideojuego) ? 'selected' : ''}}">
+                    <td>{{x.nombre}}</td>
+                    <td>{{x.genero}}</td>
+                    <td>{{x.clasificacion}}</td>
+                    <td>{{x.fechaDePublicacion}}</td>
+                    <td>{{x.precioDeVenta}}</td>
+                </tr>
+            </table>
+            <div class="controls">
+                <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuevoModal">Registrar nuevo videojuego</button>
+                <button class="btn btn-primary btn-info" data-toggle="modal" data-target="#modificarModal" ng-click="onModificarClick()">Modificar videojuego</button>
+                <button class="btn btn-primary btn-info" data-toggle="modal" data-target="#venderModal" ng-click="onVenderClick()">Vender videojuego</button>
+                <button class="btn btn-primary btn-info" data-toggle="modal" data-target="#comprarModal" ng-click="onComprarClick()">Comprar videojuego</button>
+                <button class="btn btn-primary btn-danger" data-toggle="modal" data-target="#eliminarModal" ng-click="eliminarVideojuego()">Eliminar videojuego</button>
+                <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar en todas las sucursales</button>
+
+            </div>
+
+            <!-- modales -->
+            <div class="modal fade" id="nuevoModal" tabindex="-1" role="dialog" aria-labelledby="nuevoModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="nuevoModal">Registrar nuevo videojuego</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Videojuego</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" id="nombre" ng-model="nuevoVideojuego.nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="genero">Genero</label>
+                                    <input class="form-control" type="text" id="genero" ng-model="nuevoVideojuego.genero">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clasificacion">Clasificación</label>
+                                    <input class="form-control" type="text" id="clasificacion" ng-model="nuevoVideojuego.clasificacion">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioDeVenta">Precio de venta</label>
+                                    <input class="form-control" type="number" id="precioDeVenta" ng-model="nuevoVideojuego.precioDeVenta">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioDeCompra">Precio de compra</label>
+                                    <input class="form-control" type="number" id="precioDeCompra" ng-model="nuevoVideojuego.precioDeCompra">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaDePublicacion">Fecha de publicación</label>
+                                    <input class="form-control" type="date" id="fechaDePublicacion" ng-model="nuevoVideojuego.fechaDePublicacion">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="registrarVideoJuego()">Registrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modificarModal" tabindex="-1" role="dialog" aria-labelledby="modificarModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="modificarModal">Modificar videojuego</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Videojuego</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" id="nombre" ng-model="videojuegoPorModificar.nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="genero">Genero</label>
+                                    <input class="form-control" type="text" id="genero" ng-model="videojuegoPorModificar.genero">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clasificacion">Clasificación</label>
+                                    <input class="form-control" type="text" id="clasificacion" ng-model="videojuegoPorModificar.clasificacion">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioDeVenta">Precio de venta</label>
+                                    <input class="form-control" type="number" id="precioDeVenta" ng-model="videojuegoPorModificar.precioDeVenta">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioDeCompra">Precio de compra</label>
+                                    <input class="form-control" type="number" id="precioDeCompra" ng-model="videojuegoPorModificar.precioDeCompra">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaDePublicacion">Fecha de publicación</label>
+                                    <input class="form-control" type="date" id="fechaDePublicacion" ng-model="videojuegoPorModificar.fechaDePublicacion">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="modificarVideojuego()">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="venderModal" tabindex="-1" role="dialog" aria-labelledby="detallesModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="venderModal">Vender videojuego</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Videojuego</h3>
+                            <p><strong>Nombre: </strong> {{"A"}}</p>
+                            <p><strong>Precio: </strong> {{"1"}}</p>
+
+                            <h3>Datos de la Venta</h3>
+                            <p><strong>Sucursal: </strong> {{"Xalapa"}}</p>
+                            <p><strong>Total: </strong> {{" 1" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+
+
+
+
+        <!-- scripts -->
+
+        <!-- jQuery -->
+        <script src="fuentes/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="fuentes/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+
+        <!-- propios -->
+        <script src="fuentes/angularjs/angular.min.js"></script>
+        <script src="JavaScripts/catalogo.js"></script>
+
+    </body>
+</html>
