@@ -1,0 +1,1248 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Started on 2017-06-12 01:29:35 CDT
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- TOC entry 1948 (class 1262 OID 16569)
+-- Name: tiendavideojuegos; Type: DATABASE; Schema: -; Owner: admin
+--
+
+CREATE DATABASE tiendavideojuegos WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'es_MX.UTF-8' LC_CTYPE = 'es_MX.UTF-8';
+
+
+ALTER DATABASE tiendavideojuegos OWNER TO admin;
+
+\connect tiendavideojuegos
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- TOC entry 533 (class 2612 OID 16386)
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
+--
+
+CREATE PROCEDURAL LANGUAGE plpgsql;
+
+
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 147 (class 1259 OID 16603)
+-- Dependencies: 3
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO admin;
+
+--
+-- TOC entry 146 (class 1259 OID 16601)
+-- Dependencies: 147 3
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1951 (class 0 OID 0)
+-- Dependencies: 146
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- TOC entry 149 (class 1259 OID 16613)
+-- Dependencies: 3
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO admin;
+
+--
+-- TOC entry 148 (class 1259 OID 16611)
+-- Dependencies: 149 3
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1952 (class 0 OID 0)
+-- Dependencies: 148
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- TOC entry 145 (class 1259 OID 16593)
+-- Dependencies: 3
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO admin;
+
+--
+-- TOC entry 144 (class 1259 OID 16591)
+-- Dependencies: 145 3
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1953 (class 0 OID 0)
+-- Dependencies: 144
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- TOC entry 151 (class 1259 OID 16623)
+-- Dependencies: 3
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO admin;
+
+--
+-- TOC entry 153 (class 1259 OID 16633)
+-- Dependencies: 3
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO admin;
+
+--
+-- TOC entry 152 (class 1259 OID 16631)
+-- Dependencies: 3 153
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1954 (class 0 OID 0)
+-- Dependencies: 152
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- TOC entry 150 (class 1259 OID 16621)
+-- Dependencies: 3 151
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1955 (class 0 OID 0)
+-- Dependencies: 150
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- TOC entry 155 (class 1259 OID 16643)
+-- Dependencies: 3
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO admin;
+
+--
+-- TOC entry 154 (class 1259 OID 16641)
+-- Dependencies: 3 155
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1956 (class 0 OID 0)
+-- Dependencies: 154
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- TOC entry 167 (class 1259 OID 16789)
+-- Dependencies: 3
+-- Name: compra; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE compra (
+    "idCompra" integer NOT NULL,
+    "Fecha" date NOT NULL,
+    "Monto" numeric NOT NULL,
+    "idVideojuego" integer NOT NULL,
+    cantidad integer NOT NULL
+);
+
+
+ALTER TABLE public.compra OWNER TO admin;
+
+--
+-- TOC entry 166 (class 1259 OID 16787)
+-- Dependencies: 3 167
+-- Name: compra_idCompra_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE "compra_idCompra_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."compra_idCompra_seq" OWNER TO admin;
+
+--
+-- TOC entry 1957 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: compra_idCompra_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE "compra_idCompra_seq" OWNED BY compra."idCompra";
+
+
+--
+-- TOC entry 157 (class 1259 OID 16697)
+-- Dependencies: 1873 3
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO admin;
+
+--
+-- TOC entry 156 (class 1259 OID 16695)
+-- Dependencies: 3 157
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1958 (class 0 OID 0)
+-- Dependencies: 156
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- TOC entry 143 (class 1259 OID 16583)
+-- Dependencies: 3
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO admin;
+
+--
+-- TOC entry 142 (class 1259 OID 16581)
+-- Dependencies: 3 143
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1959 (class 0 OID 0)
+-- Dependencies: 142
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- TOC entry 141 (class 1259 OID 16572)
+-- Dependencies: 3
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO admin;
+
+--
+-- TOC entry 140 (class 1259 OID 16570)
+-- Dependencies: 141 3
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO admin;
+
+--
+-- TOC entry 1960 (class 0 OID 0)
+-- Dependencies: 140
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- TOC entry 158 (class 1259 OID 16731)
+-- Dependencies: 3
+-- Name: django_session; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO admin;
+
+--
+-- TOC entry 169 (class 1259 OID 16800)
+-- Dependencies: 3
+-- Name: reserva; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE reserva (
+    "idReservacion" integer NOT NULL,
+    estado character varying(10) NOT NULL,
+    "idCliente" integer NOT NULL,
+    fecha date NOT NULL,
+    "idVideojuego" integer NOT NULL
+);
+
+
+ALTER TABLE public.reserva OWNER TO admin;
+
+--
+-- TOC entry 168 (class 1259 OID 16798)
+-- Dependencies: 3 169
+-- Name: reserva_idReservacion_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE "reserva_idReservacion_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."reserva_idReservacion_seq" OWNER TO admin;
+
+--
+-- TOC entry 1961 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: reserva_idReservacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE "reserva_idReservacion_seq" OWNED BY reserva."idReservacion";
+
+
+--
+-- TOC entry 159 (class 1259 OID 16742)
+-- Dependencies: 3
+-- Name: tienda; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE tienda (
+    tienda integer NOT NULL,
+    nombre character varying(35) NOT NULL
+);
+
+
+ALTER TABLE public.tienda OWNER TO admin;
+
+--
+-- TOC entry 161 (class 1259 OID 16753)
+-- Dependencies: 3
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE usuarios (
+    "idCliente" integer NOT NULL,
+    nombre character varying(30) NOT NULL,
+    apellidos character varying(30) NOT NULL,
+    telefono integer,
+    correo character varying(35) NOT NULL
+);
+
+
+ALTER TABLE public.usuarios OWNER TO admin;
+
+--
+-- TOC entry 160 (class 1259 OID 16751)
+-- Dependencies: 3 161
+-- Name: usuarios_idCliente_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE "usuarios_idCliente_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."usuarios_idCliente_seq" OWNER TO admin;
+
+--
+-- TOC entry 1962 (class 0 OID 0)
+-- Dependencies: 160
+-- Name: usuarios_idCliente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE "usuarios_idCliente_seq" OWNED BY usuarios."idCliente";
+
+
+--
+-- TOC entry 163 (class 1259 OID 16761)
+-- Dependencies: 3
+-- Name: venta; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE venta (
+    "idVenta" integer NOT NULL,
+    monto numeric NOT NULL,
+    fechaventa date NOT NULL,
+    idvideojuego integer NOT NULL,
+    "cantidadVendida" integer NOT NULL,
+    reserva boolean,
+    "idCliente" integer NOT NULL
+);
+
+
+ALTER TABLE public.venta OWNER TO admin;
+
+--
+-- TOC entry 162 (class 1259 OID 16759)
+-- Dependencies: 163 3
+-- Name: venta_idVenta_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE "venta_idVenta_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."venta_idVenta_seq" OWNER TO admin;
+
+--
+-- TOC entry 1963 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: venta_idVenta_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE "venta_idVenta_seq" OWNED BY venta."idVenta";
+
+
+--
+-- TOC entry 165 (class 1259 OID 16778)
+-- Dependencies: 3
+-- Name: videojuego; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE videojuego (
+    "idVideojuego" integer NOT NULL,
+    nombre character varying(50) NOT NULL,
+    genero character varying(20) NOT NULL,
+    "precioVenta" numeric NOT NULL,
+    clasificacion character varying(1),
+    disponibilidad smallint NOT NULL,
+    descripcion character varying(50),
+    "fechaRegistro" date NOT NULL
+);
+
+
+ALTER TABLE public.videojuego OWNER TO admin;
+
+--
+-- TOC entry 164 (class 1259 OID 16776)
+-- Dependencies: 165 3
+-- Name: videojuego_idVideojuego_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE "videojuego_idVideojuego_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."videojuego_idVideojuego_seq" OWNER TO admin;
+
+--
+-- TOC entry 1964 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: videojuego_idVideojuego_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE "videojuego_idVideojuego_seq" OWNED BY videojuego."idVideojuego";
+
+
+--
+-- TOC entry 1867 (class 2604 OID 16606)
+-- Dependencies: 147 146 147
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 1868 (class 2604 OID 16616)
+-- Dependencies: 149 148 149
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 1866 (class 2604 OID 16596)
+-- Dependencies: 144 145 145
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 1869 (class 2604 OID 16626)
+-- Dependencies: 151 150 151
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 1870 (class 2604 OID 16636)
+-- Dependencies: 152 153 153
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 1871 (class 2604 OID 16646)
+-- Dependencies: 154 155 155
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 1877 (class 2604 OID 16792)
+-- Dependencies: 166 167 167
+-- Name: idCompra; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY compra ALTER COLUMN "idCompra" SET DEFAULT nextval('"compra_idCompra_seq"'::regclass);
+
+
+--
+-- TOC entry 1872 (class 2604 OID 16700)
+-- Dependencies: 156 157 157
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 1865 (class 2604 OID 16586)
+-- Dependencies: 143 142 143
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 1864 (class 2604 OID 16575)
+-- Dependencies: 141 140 141
+-- Name: id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- TOC entry 1878 (class 2604 OID 16803)
+-- Dependencies: 168 169 169
+-- Name: idReservacion; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY reserva ALTER COLUMN "idReservacion" SET DEFAULT nextval('"reserva_idReservacion_seq"'::regclass);
+
+
+--
+-- TOC entry 1874 (class 2604 OID 16756)
+-- Dependencies: 160 161 161
+-- Name: idCliente; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY usuarios ALTER COLUMN "idCliente" SET DEFAULT nextval('"usuarios_idCliente_seq"'::regclass);
+
+
+--
+-- TOC entry 1875 (class 2604 OID 16764)
+-- Dependencies: 163 162 163
+-- Name: idVenta; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY venta ALTER COLUMN "idVenta" SET DEFAULT nextval('"venta_idVenta_seq"'::regclass);
+
+
+--
+-- TOC entry 1876 (class 2604 OID 16781)
+-- Dependencies: 164 165 165
+-- Name: idVideojuego; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY videojuego ALTER COLUMN "idVideojuego" SET DEFAULT nextval('"videojuego_idVideojuego_seq"'::regclass);
+
+
+--
+-- TOC entry 1892 (class 2606 OID 16610)
+-- Dependencies: 147 147
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 1898 (class 2606 OID 16620)
+-- Dependencies: 149 149 149
+-- Name: auth_group_permissions_group_id_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 16618)
+-- Dependencies: 149 149
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1894 (class 2606 OID 16608)
+-- Dependencies: 147 147
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1887 (class 2606 OID 16600)
+-- Dependencies: 145 145 145
+-- Name: auth_permission_content_type_id_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_key UNIQUE (content_type_id, codename);
+
+
+--
+-- TOC entry 1889 (class 2606 OID 16598)
+-- Dependencies: 145 145
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1909 (class 2606 OID 16638)
+-- Dependencies: 153 153
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1911 (class 2606 OID 16640)
+-- Dependencies: 153 153 153
+-- Name: auth_user_groups_user_id_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- TOC entry 1902 (class 2606 OID 16628)
+-- Dependencies: 151 151
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1915 (class 2606 OID 16648)
+-- Dependencies: 155 155
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1917 (class 2606 OID 16650)
+-- Dependencies: 155 155 155
+-- Name: auth_user_user_permissions_user_id_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- TOC entry 1905 (class 2606 OID 16630)
+-- Dependencies: 151 151
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 1933 (class 2606 OID 16797)
+-- Dependencies: 167 167
+-- Name: compra_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY compra
+    ADD CONSTRAINT compra_pkey PRIMARY KEY ("idCompra");
+
+
+--
+-- TOC entry 1921 (class 2606 OID 16706)
+-- Dependencies: 157 157
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1882 (class 2606 OID 16590)
+-- Dependencies: 143 143 143
+-- Name: django_content_type_app_label_45f3b1d93ec8c61c_uniq; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_45f3b1d93ec8c61c_uniq UNIQUE (app_label, model);
+
+
+--
+-- TOC entry 1884 (class 2606 OID 16588)
+-- Dependencies: 143 143
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1880 (class 2606 OID 16580)
+-- Dependencies: 141 141
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1924 (class 2606 OID 16738)
+-- Dependencies: 158 158
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- TOC entry 1935 (class 2606 OID 16805)
+-- Dependencies: 169 169
+-- Name: reserva_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT reserva_pkey PRIMARY KEY ("idReservacion");
+
+
+--
+-- TOC entry 1927 (class 2606 OID 16758)
+-- Dependencies: 161 161
+-- Name: usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY usuarios
+    ADD CONSTRAINT usuarios_pkey PRIMARY KEY ("idCliente");
+
+
+--
+-- TOC entry 1929 (class 2606 OID 16775)
+-- Dependencies: 163 163
+-- Name: venta_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY venta
+    ADD CONSTRAINT venta_pkey PRIMARY KEY ("idVenta");
+
+
+--
+-- TOC entry 1931 (class 2606 OID 16786)
+-- Dependencies: 165 165
+-- Name: videojuego_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY videojuego
+    ADD CONSTRAINT videojuego_pkey PRIMARY KEY ("idVideojuego");
+
+
+--
+-- TOC entry 1890 (class 1259 OID 16657)
+-- Dependencies: 147
+-- Name: auth_group_name_253ae2a6331666e8_like; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_253ae2a6331666e8_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- TOC entry 1895 (class 1259 OID 16668)
+-- Dependencies: 149
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- TOC entry 1896 (class 1259 OID 16669)
+-- Dependencies: 149
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 1885 (class 1259 OID 16656)
+-- Dependencies: 145
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- TOC entry 1906 (class 1259 OID 16682)
+-- Dependencies: 153
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- TOC entry 1907 (class 1259 OID 16681)
+-- Dependencies: 153
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- TOC entry 1912 (class 1259 OID 16694)
+-- Dependencies: 155
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 1913 (class 1259 OID 16693)
+-- Dependencies: 155
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- TOC entry 1903 (class 1259 OID 16670)
+-- Dependencies: 151
+-- Name: auth_user_username_51b3b110094b8aae_like; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_51b3b110094b8aae_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- TOC entry 1918 (class 1259 OID 16717)
+-- Dependencies: 157
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- TOC entry 1919 (class 1259 OID 16718)
+-- Dependencies: 157
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- TOC entry 1922 (class 1259 OID 16739)
+-- Dependencies: 158
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- TOC entry 1925 (class 1259 OID 16740)
+-- Dependencies: 158
+-- Name: django_session_session_key_461cfeaa630ca218_like; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_461cfeaa630ca218_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- TOC entry 1936 (class 2606 OID 16651)
+-- Dependencies: 1883 145 143
+-- Name: auth_content_type_id_508cf46651277a81_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_content_type_id_508cf46651277a81_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1937 (class 2606 OID 16658)
+-- Dependencies: 149 1893 147
+-- Name: auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1938 (class 2606 OID 16663)
+-- Dependencies: 149 1888 145
+-- Name: auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1942 (class 2606 OID 16688)
+-- Dependencies: 145 155 1888
+-- Name: auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1940 (class 2606 OID 16676)
+-- Dependencies: 1893 153 147
+-- Name: auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1939 (class 2606 OID 16671)
+-- Dependencies: 153 151 1901
+-- Name: auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1941 (class 2606 OID 16683)
+-- Dependencies: 151 155 1901
+-- Name: auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1943 (class 2606 OID 16707)
+-- Dependencies: 157 1883 143
+-- Name: djan_content_type_id_697914295151027a_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT djan_content_type_id_697914295151027a_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1944 (class 2606 OID 16712)
+-- Dependencies: 1901 151 157
+-- Name: django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1945 (class 2606 OID 16806)
+-- Dependencies: 163 147 1893
+-- Name: venta_idCliente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY venta
+    ADD CONSTRAINT "venta_idCliente_fkey" FOREIGN KEY ("idCliente") REFERENCES auth_group(id);
+
+
+--
+-- TOC entry 1950 (class 0 OID 0)
+-- Dependencies: 3
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2017-06-12 01:29:35 CDT
+
+--
+-- PostgreSQL database dump complete
+--
+

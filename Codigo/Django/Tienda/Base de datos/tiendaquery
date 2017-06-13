@@ -1,0 +1,45 @@
+﻿SELECT 
+  venta."idVenta", 
+  compra."idCompra", 
+  usuarios."idCliente", 
+  reserva."idReservacion", 
+  tienda.tienda, 
+  videojuego."idVideojuego"
+FROM 
+  public.tienda, 
+  public.reserva, 
+  public.usuarios, 
+  public.venta, 
+  public.videojuego, 
+  public.compra
+WHERE 
+  reserva."idReservacion" = venta.reserva AND
+  reserva."idCliente" = usuarios."idCliente" AND
+  reserva."idVideojuego" = videojuego."idVideojuego" AND
+  usuarios."idCliente" = venta."idCliente" AND
+  videojuego."idVideojuego" = venta.idvideojuego AND
+  compra."idVideojuego" = videojuego."idVideojuego" AND
+   = 
+ORDER BY
+  reserva."idReservacion" ASC, 
+  reserva.estado ASC, 
+  reserva."idCliente" ASC, 
+  reserva."idVideojuego" ASC, 
+  usuarios."idCliente" ASC, 
+  usuarios.nombre ASC, 
+  usuarios.apellidos ASC, 
+  usuarios.correo ASC, 
+  venta."idVenta" ASC, 
+  venta.fechaventa ASC, 
+  venta.idvideojuego ASC, 
+  venta.reserva ASC, 
+  venta."idCliente" ASC, 
+  videojuego."idVideojuego" ASC, 
+  videojuego.nombre ASC, 
+  videojuego.genero ASC, 
+  videojuego.clasificacion ASC, 
+  compra."idVideojuego" ASC, 
+  compra."idCompra" ASC, 
+  videojuego."precioVenta" ASC, 
+  tienda.nombre ASC, 
+  tienda.tienda ASC;
